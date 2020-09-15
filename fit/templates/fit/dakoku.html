@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+    <h2 class="page-header">打刻 （公開用であるため、出勤・退勤ボタンは非活性にしています。）</h2>
+    <font size="6" ><p id="RealtimeClockArea2">※ここに時計を表示</p></font>
+
+    <script type="text/javascript" src="../../static/fit/dakokuclock.js"></script>
+
+    <table width="200">
+        <tr>
+            <td>
+                <form action="{% url 'fit:dakoku_start' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="出 勤" disabled>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'fit:dakoku_end' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="退 勤" disabled>
+                </form>
+            </td>
+        </tr>
+    </table>
+ 
+    {{ work_date }}
+
+    <br>
+
+    {% include "pagination.html" %}{# ページネーター用のパーツ #}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th></th>
+            <th>作業日</th>
+            <th>開始時刻</th>
+            <th>終了時刻</th>
+            <th>作業時間</th>
+            <th>コメント</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for work in page %}
+            <tr>
+                <td><input type="checkbox" name="delete_dates" value="{{ work.work_date }}"></td>
+                <td>{{ work.work_date }}</td>
+                <td>{{ work.start_time }}</td>
+                <td>{{ work.end_time }}</td>
+                <td>{{ work.workhr }}</td>
+                <td>{{ work.comment }}</td>
+                <td><a href="{% url 'fit:edit' work.work_date %}">コメント入力・編集</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "pagination.html" %}{# ページネーター用のパーツ #}
+    {% csrf_token %}
+
+</div>
+
+{% endblock %}

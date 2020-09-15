@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="page-header">現在の心拍数</h2>
+        <div id="sample">情報取得中...（暫く経過しても変わらない場合は、access tokenの期限が切れています。ごめんなさい！）</div>
+        <div id="sample2"></div>
+        <div id="tenmetutest"></div>
+        <div id="chart" style="width:600px;height:300px;"</div>
+
+        <canvas id="myChart"></canvas>
+
+        <script type="text/javascript" src="../../static/fit/moment.js"></script>
+        <script type="text/javascript" src="../../static/fit/Chart.min.js"></script>
+        <script type="text/javascript" src="../../static/fit/heartps.js"></script>
+
+    </div>
+
+{% endblock %}

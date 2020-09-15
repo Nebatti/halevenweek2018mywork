@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<script src="../../static/fit/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../static/fit/moment.js"></script>
+<script type="text/javascript" src="../../static/fit/Chart.min.js"></script>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">心拍一覧</h2>
+        <table width="800" height="60">
+            <tr><td><canvas id="myBarChart0" width="400" height="60"></canvas></td></tr>
+        </table>
+
+    <div class="table-responsive">
+    {% include "pagination.html" %}{# ページネーター用のパーツ #}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>心拍数の経過</th>
+                    <th>睡眠時間</th>
+                    <th>作業開始</th>
+                    <th>作業終了</th>
+                    <th>作業時間</th>
+                    <th>コメント</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for heart in page %}
+                <tr>
+                    <td>{{ heart.heart_date.work_date }}</td>
+                    <td class="col-md-4"><canvas id="{{ heart.image_id|date:"Y-m-d" }}" width="2" height="1"></canvas></td>
+                    <td>{{ heart.heart_sleep.sleep_time }}</td>
+                    <td>{{ heart.heart_date.start_time }}</td>
+                    <td>{{ heart.heart_date.end_time }}</td>
+                    <td>{{ heart.heart_date.workhr }}</td>
+                    <td>{{ heart.heart_date.comment }}</td>
+                </tr>
+
+                <div name="a" title="{{ heart.image_id|date:'Y-m-d'}}"></div>
+                <div name="b" title="{{ heart.heart_sleep.sleep_time }}"></div>
+                <div name="c" title="{{ heart.heart_date.start_time }}"></div>
+                <div name="d" title="{{ heart.heart_date.end_time }}"></div>
+                <div name="e" title="{{ heart.heart_date.workhr }}"></div>
+
+                <script type="text/javascript" src="../../static/fit/heartweeklygraph.js"></script>
+                <script type="text/javascript" src="../../static/fit/heartdailygraph.js"></script>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% include "pagination.html" %}{# ページネーター用のパーツ #}
+    </div>
+</div>
+
+{% endblock %}

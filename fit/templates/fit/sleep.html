@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<script type="text/javascript" src="../../static/fit/Chart.min.js"></script>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="page-header">睡眠一覧</h2>
+        <table width="800" height="60">
+            <tr><td><canvas id="myBarChart" width="400" height="60"></canvas></td></tr>
+        </table>
+
+        <div class="table-responsive">
+            {% include "pagination.html" %}{# ページネーター用のパーツ #}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>日付</th>
+                        <th>睡眠の経過</th>
+                        <th>深さの割合</th>
+                        <th>深い睡眠</th>
+                        <th>浅い睡眠</th>
+                        <th>レム睡眠</th>
+                        <th>覚醒</th>
+                        <th>睡眠時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+            {% for sleep in page %}
+                <tr>
+                    <td>{{ sleep.dateOfSleep }}</td>
+                    <td class="col-md-4"><img style="width: 80ps; height: auto;" class="thumbnail" src="{{ sleep.image_url }}"></td>
+                    <td class="col-md-2"><canvas id="{{ sleep.dateOfSleep }}" width="50" height="50"></canvas></td>
+                    <td>{{ sleep.deep }}</td>
+                    <td>{{ sleep.light }}</td>
+                    <td>{{ sleep.rem }}</td>
+                    <td>{{ sleep.wake }}</td>
+                    <td>{{ sleep.sleep_time }}</td>
+                </tr>
+
+                <div name="b" title="{{ sleep.dateOfSleep }}" />
+                <div name="c" title="{{ sleep.deep }}" />
+                <div name="d" title="{{ sleep.light }}" />
+                <div name="e" title="{{ sleep.rem }}" />
+                <div name="f" title="{{ sleep.wake }}" />
+                <div name="g" title="{{ sleep.sleep_time }}" />
+
+                <script type="text/javascript" src="../../static/fit/sleepweeklygraph.js"></script>
+                <script type="text/javascript" src="../../static/fit/sleepdailygraph.js"></script>
+            {% endfor %}
+
+                </tbody>
+            </table>
+            {% include "pagination.html" %}{# ページネーター用のパーツ #}
+        </div>
+    </div>
+
+{% endblock %}

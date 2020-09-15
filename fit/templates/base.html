@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>勤怠・睡眠管理画面</title>
+
+    <link rel="stylesheet" href="../../static/fit/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/fit/css/base.css">
+</head>
+
+<body>
+    <script src="../../static/fit/jquery-3.2.1.min.js"></script>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">HAL作品</a>
+            </div>
+
+              <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+
+              </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+
+                <ul class="nav nav-sidebar">
+                    <li><a href="{% url 'fit:dakoku' %}">打刻</a></li>
+                    <li><a href="{% url 'fit:heart' %}">心拍一覧</a></li>
+                    <li><a href="{% url 'fit:sleep' %}">睡眠一覧</a></li>
+                    <li><a href="{% url 'fit:now' %}">現在の心拍状態</a></li>
+                </ul>
+
+            </div>
+
+            {% block contents %}{% endblock %}
+
+        </div>
+    </div>
+
+    <script src="../../static/fit/jquery-3.2.1.min.js"></script>
+
+</body>
+</html>

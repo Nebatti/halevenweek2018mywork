@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<link rel="stylesheet" href="../../../static/fit/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../static/fit/css/base.css">
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">edit</h2>
+    <p>edit （公開用であるため、ボタンは非活性にしています。）</p>
+    <a href="{% url 'fit:dakoku' %}">一覧画面へ</a>
+
+    <form action="" method="post">
+        {{ form.errors.message }}
+        {{ form }}<br/>
+        {% csrf_token %}
+        <input type="submit" value="登録" disabled>
+    </form>
+
+</div>
+    
+{% endblock %}
